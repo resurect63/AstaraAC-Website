@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="AstaraAC — Security Beyond Detection. Advanced anti-cheat detection, PC forensics and server protection.">
+  <title>AstaraAC — Security Beyond Detection</title>
+
+  <style>
+    :root {
+      --bg: #080b12;
+      --surface: #101725;
+      --blue: #318bff;
+      --light: #69b4ff;
+      --text: #f4f7fc;
+      --muted: #9aa8bb;
+      --border: rgba(120,160,210,.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    header {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,11,18,.88);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(15px);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      min-height: 690px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      background: rgba(35,120,255,.13);
+      filter: blur(120px);
+      border-radius: 50%;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: auto;
+      padding: 80px 0;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 16px;
+      border: 1px solid rgba(49,139,255,.35);
+      border-radius: 50px;
+      color: var(--light);
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      background: rgba(49,139,255,.07);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #42a5ff;
+      box-shadow: 0 0 12px #42a5ff;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 8vw, 82px);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 27px auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .btn {
+      padding: 13px 25px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: .25s;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .btn-primary:hover {
+      background: #176fdf;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--light);
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-heading small {
+      color: var(--blue);
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 5vw, 43px);
+      margin-top: 10px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 12px auto 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: linear-gradient(145deg,#111c2c,#0c121d);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      transition: .3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: rgba(49,139,255,.5);
+    }
+
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      background: rgba(49,139,255,.12);
+      color: var(--light);
+      border-radius: 10px;
+      font-size: 21px;
+      margin-bottom: 20px;
+    }
+
+    .feature h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .platform {
+      background: #0c111b;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .platform-item {
+      text-align: center;
+      padding: 27px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .platform-item h3 {
+      font-size: 17px;
+      color: var(--light);
+    }
+
+    .platform-item p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .download-box {
+      text-align: center;
+      padding: 55px 25px;
+      background: linear-gradient(135deg,#10213a,#0c1422);
+      border: 1px solid rgba(49,139,255,.25);
+      border-radius: 18px;
+    }
+
+    .download-box h2 {
+      font-size: clamp(28px,5vw,40px);
+    }
+
+    .download-box p {
+      color: var(--muted);
+      margin: 15px auto 25px;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 6px;
+      background: rgba(49,139,255,.12);
+      color: var(--light);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--light);
+    }
+
+    @media(max-width: 700px) {
+      .nav-links {
+        gap: 13px;
+        font-size: 12px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 580px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .platform-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      section {
+        padding: 75px 0;
+      }
+    }
+
+    @media(max-width: 390px) {
+      .brand {
+        font-size: 17px;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="brand">ASTARA<span>AC</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="documentation.html">Docs</a></li>
+        <li><a href="downloads.html">Downloads</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="status">
+          <span class="dot"></span>
+          IN DEVELOPMENT
+        </div>
+
+        <h1>
+          Security Beyond<br>
+          <span>Detection.</span>
+        </h1>
+
+        <p>
+          An advanced security ecosystem built for anti-cheat detection,
+          PC forensics, server protection and intelligent security analysis.
+        </p>
+
+        <div class="buttons">
+          <a href="#features" class="btn btn-primary">Explore AstaraAC</a>
+          <a href="downloads.html" class="btn btn-secondary">View Downloads</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+
+      <div class="section-heading">
+        <small>CORE CAPABILITIES</small>
+        <h2>Built for Advanced Security</h2>
+        <p>
+          Multiple security technologies working together
+          in one unified ecosystem.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature">
+          <div class="feature-icon">⌘</div>
+          <h3>Anti-Cheat Engine</h3>
+          <p>
+            Advanced detection architecture designed to identify
+            suspicious gameplay behavior and support fair environments.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">◈</div>
+          <h3>PC Forensics</h3>
+          <p>
+            Structured forensic analysis designed for transparent
+            and authorized security investigations.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">⬡</div>
+          <h3>Forensic Screenshare</h3>
+          <p>
+            Consent-based investigation workflows with
+            transparent evidence review.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">▣</div>
+          <h3>Security Dashboard</h3>
+          <p>
+            A centralized dashboard for managing detections,
+            investigations, servers and security events.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="platform" id="platform">
+    <div class="container">
+
+      <div class="section-heading">
+        <small>COMPATIBILITY</small>
+        <h2>One Ecosystem. Multiple Platforms.</h2>
+        <p>
+          Designed to connect desktop security
+          with modern Minecraft server infrastructure.
+        </p>
+      </div>
+
+      <div class="platform-grid">
+
+        <div class="platform-item">
+          <h3>Windows</h3>
+          <p>Desktop Scanner</p>
+        </div>
+
+        <div class="platform-item">
+          <h3>Paper</h3>
+          <p>Server Integration</p>
+        </div>
+
+        <div class="platform-item">
+          <h3>Folia</h3>
+          <p>Server Integration</p>
+        </div>
+
+        <div class="platform-item">
+          <h3>Velocity</h3>
+          <p>Proxy Integration</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="container">
+      <div class="download-box">
+
+        <h2>AstaraAC Is Coming.</h2>
+
+        <p>
+          The platform is currently under active development.
+          Official releases will be announced when ready.
+        </p>
+
+        <span class="coming-soon">DOWNLOADS COMING SOON</span>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>ASTARAAC — Security Beyond Detection.</p>
+    <p>Created by <strong>Resurect</strong></p>
+    <p>© 2026 AstaraAC. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
