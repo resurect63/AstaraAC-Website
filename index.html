@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#08090b">
 <meta name="description" content="AstaraAC - Security Beyond Detection.">
 <title>AstaraAC — Security Beyond Detection</title>
@@ -25,9 +25,7 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -57,7 +55,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: opacity .7s, visibility .7s;
+  transition: opacity .6s, visibility .6s;
 }
 
 .loader.hide {
@@ -67,30 +65,28 @@ a {
 }
 
 .loader img {
-  width: 85px;
-  height: 85px;
+  width: 75px;
+  height: 75px;
   object-fit: contain;
   animation: breathe 2s infinite;
 }
 
 .loader-name {
-  margin-top: 20px;
-  font-size: 22px;
+  margin-top: 16px;
+  font-size: 18px;
   font-weight: 800;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
 }
 
-.loader-name span {
-  color: var(--blue-light);
-}
+.loader-name span { color: var(--blue-light); }
 
 .loader-bar {
-  width: 150px;
+  width: 130px;
   height: 3px;
   background: #24262c;
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 25px;
+  margin-top: 22px;
 }
 
 .loader-bar::after {
@@ -121,7 +117,7 @@ header {
 }
 
 .navbar {
-  height: 100px;
+  height: 85px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -130,45 +126,41 @@ header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .brand img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
 .brand-name {
-  font-size: 29px;
-  font-weight: 500;
-  letter-spacing: -1px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: .5px;
 }
 
-.brand-name span {
-  color: var(--blue-light);
-}
+.brand-name span { color: var(--blue-light); }
 
 .menu-button {
   background: none;
   border: none;
   color: white;
-  font-size: 32px;
+  font-size: 29px;
   cursor: pointer;
   transition: .2s;
 }
 
-.menu-button:hover {
-  color: var(--blue-light);
-}
+.menu-button:hover { color: var(--blue-light); }
 
 /* MENU */
 
 .menu-panel {
   position: absolute;
-  top: 85px;
+  top: 75px;
   right: 5%;
-  width: 250px;
+  width: 245px;
   padding: 12px;
   background: #17181d;
   border: 1px solid #292b32;
@@ -187,8 +179,8 @@ header {
 
 .menu-panel a {
   display: block;
-  padding: 14px;
-  font-size: 14px;
+  padding: 13px;
+  font-size: 13px;
   color: #c2c4cb;
   border-radius: 7px;
   transition: .2s;
@@ -202,8 +194,8 @@ header {
 /* HERO */
 
 .hero {
-  min-height: 1050px;
-  padding-top: 410px;
+  min-height: 900px;
+  padding-top: 265px;
   position: relative;
   overflow: hidden;
 }
@@ -215,10 +207,10 @@ header {
 }
 
 .hero h1 {
-  font-size: clamp(55px, 9vw, 100px);
+  font-size: clamp(54px, 9vw, 96px);
   font-weight: 800;
-  line-height: .98;
-  letter-spacing: -5px;
+  line-height: .99;
+  letter-spacing: -4px;
 }
 
 .hero h1 span {
@@ -229,26 +221,26 @@ header {
 .hero-description {
   max-width: 680px;
   color: #b6b7bd;
-  font-size: clamp(17px, 2.4vw, 24px);
-  line-height: 1.7;
-  margin-top: 55px;
+  font-size: clamp(17px, 2.4vw, 23px);
+  line-height: 1.65;
+  margin-top: 38px;
 }
 
 .hero-buttons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 13px;
   max-width: 480px;
-  margin-top: 45px;
+  margin-top: 32px;
 }
 
 .btn {
-  min-height: 72px;
+  min-height: 66px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 13px;
-  font-size: 19px;
+  border-radius: 12px;
+  font-size: 18px;
   font-weight: 600;
   transition: .25s;
 }
@@ -277,24 +269,24 @@ header {
 .system-info {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-top: 55px;
+  gap: 12px;
+  margin-top: 35px;
   color: #a8aab1;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .system-info .symbol {
-  font-size: 24px;
+  font-size: 22px;
   color: white;
 }
 
-/* CHESS PIXEL BACKGROUND */
+/* PIXEL CHECKERBOARD */
 
 .pixel-background {
   position: absolute;
   width: 480px;
-  height: 650px;
-  top: 570px;
+  height: 570px;
+  top: 350px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
@@ -312,7 +304,7 @@ header {
   background: #30343d;
   border: 1px solid rgba(255,255,255,.035);
   opacity: 0;
-  animation: pixelAppear 4s ease-in-out infinite alternate;
+  animation: pixelGlow 4s ease-in-out infinite alternate;
 }
 
 .pixel.blue {
@@ -320,58 +312,42 @@ header {
   border-color: rgba(120,155,255,.2);
 }
 
-.pixel.light {
-  background: #8996ae;
+.pixel.light { background: #8996ae; }
+.pixel.dark { background: #242832; }
+
+@keyframes pixelGlow {
+  0% { opacity: .12; }
+  100% { opacity: .75; }
 }
 
-.pixel.dark {
-  background: #242832;
-}
-
-@keyframes pixelAppear {
-  0% {
-    opacity: .12;
-    filter: brightness(.7);
-  }
-  100% {
-    opacity: .75;
-    filter: brightness(1.15);
-  }
-}
-
-/* SUBTLE BACKGROUND */
+/* BACKGROUND */
 
 .background-lines {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: .1;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      transparent 0px,
-      transparent 15px,
-      rgba(65,105,210,.18) 16px,
-      transparent 17px
-    );
-  mask-image: linear-gradient(transparent, black 35%, transparent 90%);
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 15px,
+    rgba(65,105,210,.18) 16px,
+    transparent 17px
+  );
+  mask-image: linear-gradient(transparent, black 30%, transparent 90%);
 }
 
 /* SECTIONS */
 
-section:not(.hero) {
-  padding: 110px 0;
-}
+section:not(.hero) { padding: 95px 0; }
 
 .section-title {
-  font-size: clamp(30px, 5vw, 45px);
+  font-size: clamp(30px, 5vw, 44px);
   letter-spacing: -1.5px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.section-title span {
-  color: var(--blue-light);
-}
+.section-title span { color: var(--blue-light); }
 
 .section-description {
   max-width: 650px;
@@ -385,32 +361,30 @@ section:not(.hero) {
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 45px;
+  margin-top: 38px;
   border: 1px solid #292b32;
   background: #292b32;
   gap: 1px;
 }
 
 .feature {
-  padding: 35px;
+  padding: 30px;
   background: #0b0c0f;
   transition: .3s;
 }
 
-.feature:hover {
-  background: #111522;
-}
+.feature:hover { background: #111522; }
 
 .feature-number {
   color: var(--blue-light);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 }
 
 .feature h3 {
-  font-size: 21px;
-  margin-bottom: 12px;
+  font-size: 20px;
+  margin-bottom: 11px;
 }
 
 .feature p {
@@ -430,15 +404,13 @@ section:not(.hero) {
 .game-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 35px;
+  gap: 28px;
+  margin-top: 30px;
   color: #a7a9b0;
-  font-size: 17px;
+  font-size: 16px;
 }
 
-.game-list span:hover {
-  color: var(--blue-light);
-}
+.game-list span:hover { color: var(--blue-light); }
 
 /* PLATFORMS */
 
@@ -446,11 +418,11 @@ section:not(.hero) {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
 .platform-item {
-  padding: 14px 22px;
+  padding: 13px 20px;
   background: #191a1f;
   border: 1px solid #292b32;
   border-radius: 8px;
@@ -465,7 +437,7 @@ section:not(.hero) {
 }
 
 .download h2 {
-  font-size: clamp(32px, 6vw, 55px);
+  font-size: clamp(32px, 6vw, 52px);
   margin-bottom: 18px;
 }
 
@@ -478,7 +450,7 @@ section:not(.hero) {
 
 .coming-soon {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 28px;
   padding: 13px 22px;
   background: #1c2b54;
   color: #a8c0ff;
@@ -490,7 +462,7 @@ section:not(.hero) {
 /* FOOTER */
 
 footer {
-  padding: 35px 0;
+  padding: 32px 0;
   border-top: 1px solid #24262c;
 }
 
@@ -499,18 +471,16 @@ footer {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 18px;
 }
 
 .footer-brand {
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 800;
   letter-spacing: 2px;
 }
 
-.footer-brand span {
-  color: var(--blue-light);
-}
+.footer-brand span { color: var(--blue-light); }
 
 .footer-copy {
   color: #777b85;
@@ -520,20 +490,18 @@ footer {
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 17px;
   color: #a1a4ad;
   font-size: 12px;
 }
 
-.footer-links a:hover {
-  color: var(--blue-light);
-}
+.footer-links a:hover { color: var(--blue-light); }
 
 /* REVEAL */
 
 .reveal {
   opacity: 0;
-  transform: translateY(25px);
+  transform: translateY(22px);
   transition: .8s ease;
 }
 
@@ -546,15 +514,15 @@ footer {
 
 @media(min-width: 1000px) {
   .hero {
-    min-height: 950px;
-    padding-top: 350px;
+    min-height: 850px;
+    padding-top: 245px;
   }
 
   .pixel-background {
     left: 75%;
-    top: 200px;
+    top: 120px;
     width: 480px;
-    height: 650px;
+    height: 570px;
     opacity: .6;
   }
 }
@@ -562,56 +530,57 @@ footer {
 /* MOBILE */
 
 @media(max-width: 700px) {
-  .navbar {
-    height: 85px;
-  }
+  .navbar { height: 75px; }
 
   .brand img {
-    width: 43px;
-    height: 43px;
+    width: 34px;
+    height: 34px;
   }
 
   .brand-name {
-    font-size: 25px;
+    font-size: 16px;
+    letter-spacing: .3px;
   }
 
+  .menu-button { font-size: 27px; }
+
   .hero {
-    min-height: 1300px;
-    padding-top: 410px;
+    min-height: 1050px;
+    padding-top: 245px;
   }
 
   .hero h1 {
-    font-size: clamp(48px, 10vw, 75px);
+    font-size: clamp(47px, 10vw, 72px);
     letter-spacing: -3px;
   }
 
   .hero-description {
-    margin-top: 60px;
-    font-size: 19px;
+    margin-top: 35px;
+    font-size: 18px;
   }
 
-  .hero-buttons {
-    margin-top: 45px;
-  }
+  .hero-buttons { margin-top: 28px; }
+
+  .btn { min-height: 62px; }
 
   .pixel-background {
-    top: 570px;
-    width: 480px;
-    height: 650px;
+    top: 390px;
+    width: 420px;
+    height: 540px;
     opacity: .8;
   }
 
-  .features {
-    grid-template-columns: 1fr;
+  .system-info {
+    margin-top: 32px;
+    font-size: 13px;
+    gap: 9px;
   }
 
-  .feature {
-    padding: 28px;
-  }
+  .features { grid-template-columns: 1fr; }
 
-  section:not(.hero) {
-    padding: 85px 0;
-  }
+  .feature { padding: 27px; }
+
+  section:not(.hero) { padding: 75px 0; }
 
   .footer-content {
     flex-direction: column;
@@ -635,7 +604,7 @@ footer {
 
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div class="loader" id="loader">
   <img src="assets/images/astaraac-branding.png" alt="AstaraAC">
   <div class="loader-name">ASTARA<span>AC</span></div>
@@ -671,13 +640,8 @@ footer {
 
 <main>
 
-<!-- HERO -->
 <section class="hero" id="home">
-
   <div class="background-lines"></div>
-
-  <!-- Pixel squares are generated below -->
-
   <div class="pixel-background" id="pixelBackground"></div>
 
   <div class="container">
@@ -713,10 +677,8 @@ footer {
 
     </div>
   </div>
-
 </section>
 
-<!-- FEATURES -->
 <section id="features">
   <div class="container">
 
@@ -771,7 +733,6 @@ footer {
   </div>
 </section>
 
-<!-- GAMES -->
 <section class="games" id="games">
   <div class="container">
 
@@ -788,7 +749,6 @@ footer {
   </div>
 </section>
 
-<!-- PLATFORMS -->
 <section id="platform">
   <div class="container">
 
@@ -811,7 +771,6 @@ footer {
   </div>
 </section>
 
-<!-- PRIVACY -->
 <section>
   <div class="container">
 
@@ -828,7 +787,6 @@ footer {
   </div>
 </section>
 
-<!-- DOWNLOAD -->
 <section class="download">
   <div class="container">
 
@@ -848,7 +806,6 @@ footer {
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-content">
@@ -886,78 +843,75 @@ window.addEventListener("load", () => {
 
 setTimeout(closeLoader, 3500);
 
-/* PIXEL GRID GENERATOR */
+/* PIXEL GRID */
 const pixelBackground = document.getElementById("pixelBackground");
 
 const pattern = [
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000001110000000000",
-  "000011111000000000",
-  "000111111100000000",
-  "001111111110000000",
-  "000111111111000000",
-  "000011111111100000",
-  "000001111111110000",
-  "000000111111111000",
-  "000000011111111100",
-  "000000001111111110",
-  "000000000111111111",
-  "000000000011111111",
-  "000000000001111111",
-  "000000000000111111",
-  "000000000000011110",
-  "000000000000001100",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000"
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000001110000000000",
+"000011111000000000",
+"000111111100000000",
+"001111111110000000",
+"000111111111000000",
+"000011111111100000",
+"000001111111110000",
+"000000111111111000",
+"000000011111111100",
+"000000001111111110",
+"000000000111111111",
+"000000000011111111",
+"000000000001111111",
+"000000000000111111",
+"000000000000011110",
+"000000000000001100",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000"
 ];
 
 const bluePattern = [
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000",
-  "000000100000000000",
-  "000001110000000000",
-  "000011111000000000",
-  "000111111100000000",
-  "000011111110000000",
-  "000001111111000000",
-  "000000111111100000",
-  "000000011111110000",
-  "000000001111111000",
-  "000000000111111100",
-  "000000000011111110",
-  "000000000001111110",
-  "000000000000111100",
-  "000000000000011100",
-  "000000000000001100",
-  "000000000000000100",
-  "000000000000000000",
-  "000000000000000000",
-  "000000000000000000"
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000",
+"000000100000000000",
+"000001110000000000",
+"000011111000000000",
+"000111111100000000",
+"000011111110000000",
+"000001111111000000",
+"000000111111100000",
+"000000011111110000",
+"000000001111111000",
+"000000000111111100",
+"000000000011111110",
+"000000000001111110",
+"000000000000111100",
+"000000000000011100",
+"000000000000001100",
+"000000000000000100",
+"000000000000000000",
+"000000000000000000",
+"000000000000000000"
 ];
 
 for (let row = 0; row < 25; row++) {
   for (let col = 0; col < 18; col++) {
-
     const pixel = document.createElement("div");
-    const active = pattern[row][col] === "1";
 
-    if (active) {
+    if (pattern[row][col] === "1") {
       const isBlue = bluePattern[row][col] === "1";
 
       pixel.className = "pixel " +
         (isBlue ? "blue" : (Math.random() > .5 ? "light" : "dark"));
 
-      pixel.style.opacity = ".5";
       pixel.style.animationDelay = (Math.random() * 3) + "s";
     }
 
@@ -971,7 +925,6 @@ const menuPanel = document.getElementById("menuPanel");
 
 menuButton.addEventListener("click", () => {
   const opened = menuPanel.classList.toggle("open");
-
   menuButton.textContent = opened ? "✕" : "☰";
   menuButton.setAttribute("aria-expanded", opened);
 });
@@ -993,7 +946,7 @@ document.addEventListener("click", event => {
   }
 });
 
-/* SCROLL REVEAL */
+/* SCROLL ANIMATION */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
