@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://resurect63.github.io/AstaraAC-Website/sitemap.xml
