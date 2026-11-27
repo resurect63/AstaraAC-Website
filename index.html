@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08090b">
 <meta name="description" content="AstaraAC - Security Beyond Detection.">
 <title>AstaraAC — Security Beyond Detection</title>
@@ -52,8 +52,8 @@ a {
   z-index: 9999;
   background: #08090b;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   transition: opacity .6s, visibility .6s;
 }
@@ -65,28 +65,28 @@ a {
 }
 
 .loader img {
-  width: 75px;
-  height: 75px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   animation: breathe 2s infinite;
 }
 
 .loader-name {
-  margin-top: 16px;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 4px;
+  margin-top: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 3px;
 }
 
 .loader-name span { color: var(--blue-light); }
 
 .loader-bar {
-  width: 130px;
+  width: 125px;
   height: 3px;
   background: #24262c;
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .loader-bar::after {
@@ -117,7 +117,7 @@ header {
 }
 
 .navbar {
-  height: 85px;
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,28 +126,27 @@ header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
 .brand img {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
 }
 
 .brand-name {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: .5px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .2px;
+  color: #e8e9ed;
 }
-
-.brand-name span { color: var(--blue-light); }
 
 .menu-button {
   background: none;
   border: none;
   color: white;
-  font-size: 29px;
+  font-size: 28px;
   cursor: pointer;
   transition: .2s;
 }
@@ -158,7 +157,7 @@ header {
 
 .menu-panel {
   position: absolute;
-  top: 75px;
+  top: 68px;
   right: 5%;
   width: 245px;
   padding: 12px;
@@ -194,8 +193,8 @@ header {
 /* HERO */
 
 .hero {
-  min-height: 900px;
-  padding-top: 265px;
+  min-height: 850px;
+  padding-top: 205px;
   position: relative;
   overflow: hidden;
 }
@@ -207,9 +206,9 @@ header {
 }
 
 .hero h1 {
-  font-size: clamp(54px, 9vw, 96px);
+  font-size: clamp(52px, 9vw, 96px);
   font-weight: 800;
-  line-height: .99;
+  line-height: 1.02;
   letter-spacing: -4px;
 }
 
@@ -223,7 +222,7 @@ header {
   color: #b6b7bd;
   font-size: clamp(17px, 2.4vw, 23px);
   line-height: 1.65;
-  margin-top: 38px;
+  margin-top: 34px;
 }
 
 .hero-buttons {
@@ -231,11 +230,11 @@ header {
   flex-direction: column;
   gap: 13px;
   max-width: 480px;
-  margin-top: 32px;
+  margin-top: 30px;
 }
 
 .btn {
-  min-height: 66px;
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -269,10 +268,10 @@ header {
 .system-info {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 35px;
+  gap: 11px;
+  margin-top: 32px;
   color: #a8aab1;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .system-info .symbol {
@@ -286,7 +285,7 @@ header {
   position: absolute;
   width: 480px;
   height: 570px;
-  top: 350px;
+  top: 300px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
@@ -320,7 +319,7 @@ header {
   100% { opacity: .75; }
 }
 
-/* BACKGROUND */
+/* BACKGROUND LINES */
 
 .background-lines {
   position: absolute;
@@ -339,7 +338,7 @@ header {
 
 /* SECTIONS */
 
-section:not(.hero) { padding: 95px 0; }
+section:not(.hero) { padding: 90px 0; }
 
 .section-title {
   font-size: clamp(30px, 5vw, 44px);
@@ -476,8 +475,8 @@ footer {
 
 .footer-brand {
   font-size: 19px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .footer-brand span { color: var(--blue-light); }
@@ -515,12 +514,12 @@ footer {
 @media(min-width: 1000px) {
   .hero {
     min-height: 850px;
-    padding-top: 245px;
+    padding-top: 220px;
   }
 
   .pixel-background {
     left: 75%;
-    top: 120px;
+    top: 100px;
     width: 480px;
     height: 570px;
     opacity: .6;
@@ -530,23 +529,23 @@ footer {
 /* MOBILE */
 
 @media(max-width: 700px) {
-  .navbar { height: 75px; }
+  .navbar { height: 70px; }
 
   .brand img {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
 
   .brand-name {
-    font-size: 16px;
-    letter-spacing: .3px;
+    font-size: 14px;
+    letter-spacing: 0;
   }
 
-  .menu-button { font-size: 27px; }
+  .menu-button { font-size: 26px; }
 
   .hero {
     min-height: 1050px;
-    padding-top: 245px;
+    padding-top: 205px;
   }
 
   .hero h1 {
@@ -555,23 +554,23 @@ footer {
   }
 
   .hero-description {
-    margin-top: 35px;
+    margin-top: 32px;
     font-size: 18px;
   }
 
-  .hero-buttons { margin-top: 28px; }
+  .hero-buttons { margin-top: 27px; }
 
   .btn { min-height: 62px; }
 
   .pixel-background {
-    top: 390px;
+    top: 340px;
     width: 420px;
     height: 540px;
     opacity: .8;
   }
 
   .system-info {
-    margin-top: 32px;
+    margin-top: 30px;
     font-size: 13px;
     gap: 9px;
   }
@@ -615,15 +614,13 @@ footer {
 <header>
   <div class="container">
     <nav class="navbar">
-
       <a href="#home" class="brand">
         <img src="assets/images/astaraac-branding.png" alt="AstaraAC Logo">
-        <div class="brand-name">ASTARA<span>AC</span></div>
+        <div class="brand-name">AstaraAC</div>
       </a>
 
       <button class="menu-button" id="menuButton"
         aria-label="Open menu" aria-expanded="false">☰</button>
-
     </nav>
   </div>
 
@@ -640,6 +637,7 @@ footer {
 
 <main>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="background-lines"></div>
   <div class="pixel-background" id="pixelBackground"></div>
@@ -649,7 +647,7 @@ footer {
 
       <h1>
         <span>Security</span>
-        Beyond Detection.
+        Beyond Detection
       </h1>
 
       <p class="hero-description">
@@ -679,9 +677,9 @@ footer {
   </div>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
   <div class="container">
-
     <h2 class="section-title reveal">
       Security <span>capabilities</span>
     </h2>
@@ -733,9 +731,9 @@ footer {
   </div>
 </section>
 
+<!-- GAMES -->
 <section class="games" id="games">
   <div class="container">
-
     <h2 class="section-title reveal">
       Supported <span>games</span>
     </h2>
@@ -745,13 +743,12 @@ footer {
       <span>Minecraft Bedrock</span>
       <span>Roblox</span>
     </div>
-
   </div>
 </section>
 
+<!-- PLATFORMS -->
 <section id="platform">
   <div class="container">
-
     <h2 class="section-title reveal">
       Supported <span>platforms</span>
     </h2>
@@ -767,13 +764,12 @@ footer {
       <div class="platform-item">Folia</div>
       <div class="platform-item">Velocity</div>
     </div>
-
   </div>
 </section>
 
+<!-- PRIVACY -->
 <section>
   <div class="container">
-
     <h2 class="section-title reveal">
       Security with <span>responsibility.</span>
     </h2>
@@ -783,13 +779,12 @@ footer {
       transparent investigations and responsible data handling.
       Detection results support human review.
     </p>
-
   </div>
 </section>
 
+<!-- DOWNLOAD -->
 <section class="download">
   <div class="container">
-
     <h2 class="reveal">AstaraAC is coming.</h2>
 
     <p class="reveal">
@@ -800,19 +795,17 @@ footer {
     <span class="coming-soon reveal">
       DOWNLOADS COMING SOON
     </span>
-
   </div>
 </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-content">
 
-      <div class="footer-brand">
-        ASTARA<span>AC</span>
-      </div>
+      <div class="footer-brand">Astara<span>AC</span></div>
 
       <div class="footer-copy">
         © 2026 AstaraAC. Created by Resurect.
@@ -946,7 +939,7 @@ document.addEventListener("click", event => {
   }
 });
 
-/* SCROLL ANIMATION */
+/* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
