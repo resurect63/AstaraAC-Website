@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#08090d">
-    <meta name="description" content="AstaraAC is an advanced anti-cheat and PC security platform currently under development.">
+    <meta name="description" content="AstaraAC — Security Beyond Detection. Advanced security platform for Windows and Minecraft server networks.">
 
     <title>AstaraAC — Security Beyond Detection</title>
 
@@ -20,251 +19,269 @@
 
 <body>
 
-    <!-- Navigation -->
-    <header class="header">
-        <nav class="navbar container">
+<header class="header">
+    <nav class="navbar container">
 
-            <a href="#" class="brand">
-                <img src="assets/images/astaraac-logo.png" alt="AstaraAC Logo">
-                <span>ASTARAAC</span>
-            </a>
+        <a href="index.html" class="brand">
+            <img src="assets/images/astaraac-logo.png" alt="AstaraAC Logo">
+            <span>ASTARAAC</span>
+        </a>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <div class="nav-links" id="navLinks">
-                <a href="#features">Features</a>
-                <a href="#platform">Platform</a>
-                <a href="documentation.html">Documentation</a>
-                <a href="changelog.html">Changelog</a>
-                <a href="#download" class="nav-download">Download</a>
-            </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="#features">Features</a>
+            <a href="#platform">Platform</a>
+            <a href="documentation.html">Documentation</a>
+            <a href="changelog.html">Changelog</a>
+            <a href="downloads.html" class="nav-download">Download</a>
+        </div>
 
-        </nav>
-    </header>
-
-
-    <main>
-
-        <!-- Hero Section -->
-        <section class="hero container">
-
-            <div class="hero-content">
-
-                <div class="status-label">
-                    <span class="status-dot"></span>
-                    PROJECT IN DEVELOPMENT
-                </div>
-
-                <h1>
-                    Security<br>
-                    <span>Beyond Detection.</span>
-                </h1>
-
-                <p class="hero-description">
-                    Advanced Anti-Cheat and PC Forensics.
-                    A unified security platform built to protect
-                    gaming environments through intelligent detection
-                    and transparent investigation.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="#download" class="button button-primary">
-                        Explore AstaraAC
-                        <span>↗</span>
-                    </a>
-
-                    <a href="documentation.html" class="button button-secondary">
-                        Read Documentation
-                    </a>
-                </div>
-
-                <div class="hero-platforms">
-                    <span>Windows</span>
-                    <span class="platform-divider">·</span>
-                    <span>Paper</span>
-                    <span class="platform-divider">·</span>
-                    <span>Folia</span>
-                    <span class="platform-divider">·</span>
-                    <span>Velocity</span>
-                </div>
-
-            </div>
-
-            <div class="hero-visual">
-                <div class="visual-glow"></div>
-                <div class="visual-grid"></div>
-
-                <img
-                    src="assets/images/astaraac-logo.png"
-                    alt="AstaraAC Security Symbol"
-                    class="hero-logo"
-                >
-
-                <div class="visual-caption">
-                    <span>ASTARAAC SECURITY SYSTEM</span>
-                    <span>01 / 06</span>
-                </div>
-            </div>
-
-        </section>
+    </nav>
+</header>
 
 
-        <!-- Features Section -->
-        <section class="features-section container" id="features">
+<main>
 
-            <div class="section-heading">
-                <span class="section-label">CAPABILITIES</span>
+    <!-- HERO -->
 
-                <h2>
-                    Multiple layers.<br>
-                    <span>One security platform.</span>
-                </h2>
+    <section class="hero container">
 
-                <p>
-                    AstaraAC brings multiple security technologies
-                    together in one unified ecosystem.
-                </p>
-            </div>
+        <div class="hero-content">
 
-            <div class="features-grid">
+            <span class="status-label">
+                <span class="status-dot"></span>
+                PROJECT IN DEVELOPMENT
+            </span>
 
-                <article class="feature-card">
-                    <span class="feature-number">01</span>
-                    <h3>Anti-Cheat Engine</h3>
-                    <p>
-                        Analyze suspicious gameplay behavior
-                        and identify potential violations.
-                    </p>
-                    <span class="feature-status">IN DEVELOPMENT</span>
-                </article>
-
-                <article class="feature-card">
-                    <span class="feature-number">02</span>
-                    <h3>PC Forensics</h3>
-                    <p>
-                        Consent-based Windows system
-                        integrity analysis.
-                    </p>
-                    <span class="feature-status">PLANNED</span>
-                </article>
-
-                <article class="feature-card">
-                    <span class="feature-number">03</span>
-                    <h3>Forensic Screenshare</h3>
-                    <p>
-                        Transparent investigation tools
-                        for authorized manual reviews.
-                    </p>
-                    <span class="feature-status">PLANNED</span>
-                </article>
-
-                <article class="feature-card">
-                    <span class="feature-number">04</span>
-                    <h3>Security Dashboard</h3>
-                    <p>
-                        Centralized monitoring, detection
-                        reports and investigation management.
-                    </p>
-                    <span class="feature-status">PLANNED</span>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- Platform Section -->
-        <section class="platform-section" id="platform">
-
-            <div class="container platform-content">
-
-                <div>
-                    <span class="section-label">ECOSYSTEM</span>
-
-                    <h2>
-                        Built for a<br>
-                        <span>connected ecosystem.</span>
-                    </h2>
-
-                    <p>
-                        A modular architecture designed to connect
-                        desktop security tools, server integrations
-                        and centralized services.
-                    </p>
-                </div>
-
-                <div class="platform-list">
-                    <div>Windows Desktop <span>01</span></div>
-                    <div>Backend & REST API <span>02</span></div>
-                    <div>Detection Engine <span>03</span></div>
-                    <div>Web Dashboard <span>04</span></div>
-                    <div>Discord Integration <span>05</span></div>
-                    <div>Minecraft Integrations <span>06</span></div>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- Download Section -->
-        <section class="download-section container" id="download">
-
-            <span class="section-label">GET ASTARAAC</span>
-
-            <h2>
-                Security is<br>
-                <span>coming soon.</span>
-            </h2>
+            <h1>
+                Security Beyond
+                <span>Detection.</span>
+            </h1>
 
             <p>
-                AstaraAC is currently under active development.
-                The first public release will be announced here.
+                A next-generation security ecosystem designed
+                for advanced anti-cheat detection, PC forensics
+                and server protection.
             </p>
 
-            <a href="#" class="button button-disabled" aria-disabled="true">
-                Download for Windows
-                <span>Coming Soon</span>
-            </a>
+            <div class="hero-actions">
+                <a href="documentation.html" class="btn btn-primary">
+                    Explore AstaraAC
+                </a>
 
-            <p class="download-note">
-                No public release is available yet.
-            </p>
+                <a href="downloads.html" class="btn btn-secondary">
+                    View Downloads
+                </a>
+            </div>
 
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-
-        <div class="container footer-content">
-
-            <a href="#" class="brand">
-                <img src="assets/images/astaraac-logo.png" alt="">
-                <span>ASTARAAC</span>
-            </a>
-
-            <p>
-                Security Beyond Detection.
-            </p>
-
-            <div class="footer-bottom">
-                <span>© 2026 AstaraAC. All rights reserved.</span>
-                <span>Created by Resurect</span>
+            <div class="hero-platforms">
+                <span>Windows</span>
+                <span>Paper</span>
+                <span>Folia</span>
+                <span>Velocity</span>
             </div>
 
         </div>
 
-    </footer>
+
+        <div class="hero-visual">
+
+            <div class="hero-glow"></div>
+
+            <div class="hero-grid"></div>
+
+            <img
+                src="assets/images/astaraac-logo.png"
+                alt="AstaraAC"
+                class="hero-logo"
+            >
+
+            <div class="hero-orbit"></div>
+
+        </div>
+
+    </section>
 
 
-    <script src="js/main.js"></script>
+    <!-- FEATURES -->
+
+    <section class="features-section container" id="features">
+
+        <div class="section-heading">
+            <span class="section-label">CORE CAPABILITIES</span>
+
+            <h2>
+                More than an
+                <span>Anti-Cheat.</span>
+            </h2>
+
+            <p>
+                A connected security platform built to provide
+                visibility, investigation and protection.
+            </p>
+        </div>
+
+
+        <div class="features-grid">
+
+            <article class="feature-card">
+                <span class="feature-number">01 / DETECTION</span>
+
+                <h3>Anti-Cheat Engine</h3>
+
+                <p>
+                    A modular detection system designed to identify
+                    suspicious gameplay behavior and security events.
+                </p>
+            </article>
+
+
+            <article class="feature-card">
+                <span class="feature-number">02 / FORENSICS</span>
+
+                <h3>PC Forensics</h3>
+
+                <p>
+                    A transparent investigation workflow for
+                    authorized system security analysis.
+                </p>
+            </article>
+
+
+            <article class="feature-card">
+                <span class="feature-number">03 / INVESTIGATION</span>
+
+                <h3>Forensic Screenshare</h3>
+
+                <p>
+                    Structured tools for assisted investigations
+                    with clear user consent and review.
+                </p>
+            </article>
+
+
+            <article class="feature-card">
+                <span class="feature-number">04 / MANAGEMENT</span>
+
+                <h3>Security Dashboard</h3>
+
+                <p>
+                    A centralized dashboard for reviewing events,
+                    managing systems and monitoring security.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLATFORM -->
+
+    <section class="platform-section container" id="platform">
+
+        <div class="section-heading">
+            <span class="section-label">PLATFORM ECOSYSTEM</span>
+
+            <h2>
+                One ecosystem.
+                <span>Multiple environments.</span>
+            </h2>
+
+            <p>
+                AstaraAC is planned to support desktop security
+                and Minecraft server infrastructure.
+            </p>
+        </div>
+
+
+        <div class="platform-grid">
+
+            <div class="platform-card">
+                <h3>Windows</h3>
+                <p>Desktop security application</p>
+            </div>
+
+            <div class="platform-card">
+                <h3>Paper</h3>
+                <p>Minecraft server integration</p>
+            </div>
+
+            <div class="platform-card">
+                <h3>Folia</h3>
+                <p>Regionized server integration</p>
+            </div>
+
+            <div class="platform-card">
+                <h3>Velocity</h3>
+                <p>Proxy-level integration</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DOWNLOAD -->
+
+    <section class="download-section container" id="download">
+
+        <div class="download-content">
+
+            <span class="section-label">GET STARTED</span>
+
+            <h2>
+                Security starts
+                <span>here.</span>
+            </h2>
+
+            <p>
+                AstaraAC is currently under development.
+                Official downloads will be available after
+                the first public release.
+            </p>
+
+            <a href="downloads.html" class="btn btn-primary">
+                Visit Download Center
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <a href="index.html" class="brand">
+            <img src="assets/images/astaraac-logo.png" alt="AstaraAC Logo">
+            <span>ASTARAAC</span>
+        </a>
+
+        <p>Security Beyond Detection.</p>
+
+        <div class="footer-bottom">
+            <span>© 2026 AstaraAC. All rights reserved.</span>
+            <span>Created by Resurect</span>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="js/main.js"></script>
 
 </body>
 </html>
