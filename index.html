@@ -4,1128 +4,858 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070b14">
-<meta name="description" content="AstaraAC — Security Beyond Detection.">
-<title>AstaraAC | Security Beyond Detection</title>
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="AstaraAC - Security Beyond Detection.">
+<title>AstaraAC — Security Beyond Detection</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg:#070b14;
-  --panel:#101b2c;
-  --blue:#258aff;
-  --cyan:#60c8ff;
-  --text:#f4f8ff;
-  --muted:#91a1b8;
-  --border:rgba(130,170,220,.15);
+  --bg: #08090b;
+  --blue: #4775f5;
+  --blue-light: #7898ff;
+  --white: #f5f6fa;
+  --muted: #a4a6ad;
 }
 
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-  scroll-behavior:smooth;
-  scroll-padding-top:100px;
+  scroll-behavior: smooth;
 }
 
 body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-  overflow-x:hidden;
-}
-
-body.loading {
-  overflow:hidden;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 a {
-  text-decoration:none;
-  color:inherit;
+  color: inherit;
+  text-decoration: none;
 }
 
 .container {
-  width:min(1160px,90%);
-  margin:auto;
+  width: min(1200px, 90%);
+  margin: auto;
 }
 
-/* LOADING SCREEN */
+/* LOADING */
 
 .loader {
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:#060a12;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  transition:opacity .8s ease,visibility .8s ease;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #08090b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity .7s, visibility .7s;
 }
 
-.loader.hidden {
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.loader-content {
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-  animation:loaderEnter 1s ease;
-}
-
-.loader-logo {
-  width:100px;
-  height:100px;
-  object-fit:contain;
-  filter:drop-shadow(0 0 25px rgba(37,138,255,.55));
-  animation:logoPulse 2s infinite ease-in-out;
+.loader img {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  animation: breathe 2s infinite;
 }
 
 .loader-name {
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:5px;
-  margin-top:20px;
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 5px;
 }
 
 .loader-name span {
-  color:var(--blue);
+  color: var(--blue-light);
 }
 
-.loader-subtitle {
-  color:#71839e;
-  font-size:10px;
-  letter-spacing:4px;
-  margin-top:8px;
+.loader-bar {
+  width: 150px;
+  height: 3px;
+  background: #24262c;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 25px;
 }
 
-.loader-track {
-  width:190px;
-  height:3px;
-  background:#172235;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:35px;
+.loader-bar::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--blue);
+  animation: loading 1.2s infinite ease-in-out;
 }
 
-.loader-progress {
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#1765df,#61caff);
-  box-shadow:0 0 15px #258aff;
-  animation:loadProgress 1.8s ease forwards;
+@keyframes loading {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(270%); }
 }
 
-.loader-status {
-  color:#68809d;
-  font-size:10px;
-  letter-spacing:2px;
-  margin-top:15px;
+@keyframes breathe {
+  50% { transform: scale(1.08); opacity: .7; }
 }
 
-@keyframes loadProgress {
-  to {width:100%;}
-}
-
-@keyframes logoPulse {
-  50% {
-    transform:scale(1.07);
-    filter:drop-shadow(0 0 40px rgba(37,138,255,.8));
-  }
-}
-
-@keyframes loaderEnter {
-  from {opacity:0;transform:translateY(15px);}
-  to {opacity:1;transform:translateY(0);}
-}
-
-/* BACKGROUND EFFECTS */
-
-.background-glow {
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(28,110,255,.13),transparent 55%),
-    radial-gradient(ellipse at 90% 60%,rgba(0,160,255,.05),transparent 45%);
-}
-
-.noise {
-  position:fixed;
-  inset:0;
-  z-index:50;
-  pointer-events:none;
-  opacity:.025;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-}
-
-/* SCROLL PROGRESS */
-
-.scroll-progress {
-  position:fixed;
-  top:0;
-  left:0;
-  height:3px;
-  width:0%;
-  z-index:1001;
-  background:linear-gradient(90deg,#258aff,#60d5ff);
-  box-shadow:0 0 12px #258aff;
-}
-
-/* NAVIGATION */
+/* HEADER */
 
 header {
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:100;
-  background:rgba(7,11,20,.75);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:background .3s;
-}
-
-header.scrolled {
-  background:rgba(7,11,20,.96);
-  box-shadow:0 10px 40px rgba(0,0,0,.2);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 .navbar {
-  height:82px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .brand img {
-  width:48px;
-  height:48px;
-  object-fit:contain;
-  border-radius:10px;
-  transition:.3s;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
-.brand:hover img {
-  transform:rotate(-5deg) scale(1.08);
-  filter:drop-shadow(0 0 12px rgba(37,138,255,.7));
+.brand-name {
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -1px;
 }
 
-.brand-text {
-  font-size:21px;
-  font-weight:900;
-  letter-spacing:2px;
+.brand-name span {
+  color: var(--blue-light);
 }
 
-.brand-text span {
-  color:var(--blue);
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  transition: .2s;
 }
 
-.nav-links {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  list-style:none;
+.menu-button:hover {
+  color: var(--blue-light);
 }
 
-.nav-links a {
-  display:block;
-  padding:10px 15px;
-  border-radius:8px;
-  color:var(--muted);
-  font-size:13px;
-  font-weight:600;
-  transition:.25s;
+/* MENU */
+
+.menu-panel {
+  position: absolute;
+  top: 85px;
+  right: 5%;
+  width: 250px;
+  padding: 12px;
+  background: #17181d;
+  border: 1px solid #292b32;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: .25s;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color:white;
-  background:rgba(40,135,255,.12);
+.menu-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-.nav-links .nav-cta {
-  color:white;
-  background:linear-gradient(135deg,#278cff,#1262d9);
-  box-shadow:0 5px 25px rgba(37,138,255,.2);
+.menu-panel a {
+  display: block;
+  padding: 14px;
+  font-size: 14px;
+  color: #c2c4cb;
+  border-radius: 7px;
+  transition: .2s;
 }
 
-.menu-toggle {
-  display:none;
-  background:rgba(37,138,255,.1);
-  border:1px solid var(--border);
-  color:white;
-  width:43px;
-  height:43px;
-  border-radius:10px;
-  font-size:23px;
-  cursor:pointer;
+.menu-panel a:hover {
+  background: #252a3b;
+  color: white;
 }
 
 /* HERO */
 
 .hero {
-  min-height:820px;
-  padding:170px 0 110px;
-  display:flex;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-grid {
-  position:absolute;
-  inset:0;
-  opacity:.16;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(60,130,220,.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(60,130,220,.12) 1px,transparent 1px);
-  background-size:55px 55px;
-  mask-image:linear-gradient(to bottom,black,transparent 90%);
+  min-height: 1050px;
+  padding-top: 410px;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
-  position:relative;
-  z-index:2;
-  max-width:780px;
-}
-
-.eyebrow {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:9px 16px;
-  background:rgba(37,138,255,.09);
-  border:1px solid rgba(37,138,255,.3);
-  border-radius:50px;
-  color:#80c4ff;
-  font-size:11px;
-  letter-spacing:2px;
-  font-weight:700;
-  margin-bottom:30px;
-}
-
-.live-dot {
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#36baff;
-  box-shadow:0 0 13px #36baff;
-  animation:pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-  50% {opacity:.35;}
+  position: relative;
+  z-index: 5;
+  max-width: 850px;
 }
 
 .hero h1 {
-  font-size:clamp(48px,8vw,88px);
-  font-weight:900;
-  letter-spacing:-5px;
-  line-height:1.05;
+  font-size: clamp(55px, 9vw, 100px);
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -5px;
 }
 
-.gradient-text {
-  background:linear-gradient(90deg,#238aff,#62d2ff,#238aff);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:gradientMove 5s linear infinite;
-}
-
-@keyframes gradientMove {
-  to {background-position:200% center;}
+.hero h1 span {
+  display: block;
+  color: var(--blue-light);
 }
 
 .hero-description {
-  max-width:640px;
-  margin-top:27px;
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.9;
+  max-width: 680px;
+  color: #b6b7bd;
+  font-size: clamp(17px, 2.4vw, 24px);
+  line-height: 1.7;
+  margin-top: 55px;
 }
 
 .hero-buttons {
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-top:35px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 480px;
+  margin-top: 45px;
 }
 
 .btn {
-  padding:14px 23px;
-  border-radius:9px;
-  font-size:13px;
-  font-weight:700;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  transition:.3s;
-  border:1px solid var(--border);
-}
-
-.btn:hover {
-  transform:translateY(-4px);
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  font-size: 19px;
+  font-weight: 600;
+  transition: .25s;
 }
 
 .btn-primary {
-  background:linear-gradient(135deg,#278cff,#1262d9);
-  color:white;
-  box-shadow:0 8px 30px rgba(37,138,255,.2);
+  background: #3d65ed;
+  color: white;
 }
 
 .btn-primary:hover {
-  box-shadow:0 10px 35px rgba(37,138,255,.45);
+  background: #527aff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px #315be544;
 }
 
 .btn-secondary {
-  background:rgba(255,255,255,.035);
-  color:white;
+  background: #242529;
+  color: white;
 }
 
-.hero-tags {
-  display:flex;
-  gap:22px;
-  flex-wrap:wrap;
-  margin-top:55px;
-  color:#71839d;
-  font-size:11px;
-  letter-spacing:1px;
+.btn-secondary:hover {
+  background: #303137;
+  transform: translateY(-3px);
 }
 
-.hero-tags span::before {
-  content:"◆";
-  color:var(--blue);
-  font-size:9px;
-  margin-right:8px;
+.system-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 55px;
+  color: #a8aab1;
+  font-size: 17px;
 }
 
-/* HERO VISUAL */
-
-.hero-visual {
-  position:absolute;
-  right:-80px;
-  top:190px;
-  width:440px;
-  height:440px;
-  display:grid;
-  place-items:center;
-  opacity:.8;
+.system-info .symbol {
+  font-size: 24px;
+  color: white;
 }
 
-.orbit {
-  position:absolute;
-  border:1px solid rgba(57,147,255,.19);
-  border-radius:50%;
-  animation:rotate 25s linear infinite;
+/* CHESS PIXEL BACKGROUND */
+
+.pixel-background {
+  position: absolute;
+  width: 480px;
+  height: 650px;
+  top: 570px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-template-rows: repeat(25, 1fr);
+  gap: 2px;
+  opacity: .8;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: radial-gradient(ellipse, black 30%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse, black 30%, transparent 76%);
 }
 
-.orbit.one {
-  width:280px;
-  height:280px;
+.pixel {
+  background: #30343d;
+  border: 1px solid rgba(255,255,255,.035);
+  opacity: 0;
+  animation: pixelAppear 4s ease-in-out infinite alternate;
 }
 
-.orbit.two {
-  width:390px;
-  height:390px;
-  animation-direction:reverse;
-  border-style:dashed;
+.pixel.blue {
+  background: #426ce7;
+  border-color: rgba(120,155,255,.2);
 }
 
-.orbit.three {
-  width:440px;
-  height:440px;
-  border-color:rgba(57,147,255,.08);
+.pixel.light {
+  background: #8996ae;
 }
 
-.orbit::after {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:-5px;
-  width:10px;
-  height:10px;
-  background:#42aaff;
-  border-radius:50%;
-  box-shadow:0 0 20px #42aaff;
+.pixel.dark {
+  background: #242832;
 }
 
-@keyframes rotate {
-  to {transform:rotate(360deg);}
+@keyframes pixelAppear {
+  0% {
+    opacity: .12;
+    filter: brightness(.7);
+  }
+  100% {
+    opacity: .75;
+    filter: brightness(1.15);
+  }
 }
 
-.core {
-  width:150px;
-  height:150px;
-  display:grid;
-  place-items:center;
-  border-radius:35px;
-  background:linear-gradient(145deg,#142b4c,#091321);
-  border:1px solid rgba(75,165,255,.45);
-  box-shadow:0 0 80px rgba(37,138,255,.2),inset 0 0 40px rgba(37,138,255,.08);
-  font-size:55px;
-  color:#6ac4ff;
-  animation:coreFloat 4s ease-in-out infinite;
-}
+/* SUBTLE BACKGROUND */
 
-@keyframes coreFloat {
-  50% {transform:translateY(-13px);}
+.background-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .1;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 15px,
+      rgba(65,105,210,.18) 16px,
+      transparent 17px
+    );
+  mask-image: linear-gradient(transparent, black 35%, transparent 90%);
 }
 
 /* SECTIONS */
 
 section:not(.hero) {
-  padding:110px 0;
+  padding: 110px 0;
 }
 
-.section-header {
-  text-align:center;
-  max-width:700px;
-  margin:0 auto 55px;
+.section-title {
+  font-size: clamp(30px, 5vw, 45px);
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
 }
 
-.section-label {
-  color:#54adff;
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:800;
+.section-title span {
+  color: var(--blue-light);
 }
 
-.section-header h2 {
-  font-size:clamp(30px,5vw,45px);
-  margin-top:14px;
-  letter-spacing:-1.5px;
-}
-
-.section-header p {
-  color:var(--muted);
-  margin-top:15px;
-  font-size:14px;
+.section-description {
+  max-width: 650px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 15px;
 }
 
 /* FEATURES */
 
-.features-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 45px;
+  border: 1px solid #292b32;
+  background: #292b32;
+  gap: 1px;
 }
 
-.feature-card {
-  position:relative;
-  overflow:hidden;
-  padding:30px;
-  min-height:240px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  background:linear-gradient(145deg,rgba(18,31,50,.9),rgba(10,17,29,.9));
-  transition:transform .35s,border-color .35s,box-shadow .35s;
+.feature {
+  padding: 35px;
+  background: #0b0c0f;
+  transition: .3s;
 }
 
-.feature-card:hover {
-  transform:translateY(-8px);
-  border-color:rgba(55,150,255,.6);
-  box-shadow:0 18px 45px rgba(0,0,0,.3),0 0 25px rgba(37,138,255,.07);
+.feature:hover {
+  background: #111522;
 }
 
-.feature-card::after {
-  content:"";
-  position:absolute;
-  width:120px;
-  height:120px;
-  right:-70px;
-  bottom:-70px;
-  background:var(--blue);
-  filter:blur(70px);
-  opacity:.15;
-  transition:.3s;
+.feature-number {
+  color: var(--blue-light);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
 }
 
-.feature-card:hover::after {
-  opacity:.4;
+.feature h3 {
+  font-size: 21px;
+  margin-bottom: 12px;
 }
 
-.feature-icon {
-  width:48px;
-  height:48px;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
-  background:rgba(37,138,255,.13);
-  border:1px solid rgba(37,138,255,.2);
-  color:#69baff;
-  font-size:22px;
-  margin-bottom:23px;
+.feature p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
-.feature-card h3 {
-  font-size:17px;
-  margin-bottom:11px;
+/* GAMES */
+
+.games {
+  background: #0b0c0f;
+  border-top: 1px solid #24262c;
+  border-bottom: 1px solid #24262c;
 }
 
-.feature-card p {
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.8;
+.game-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 35px;
+  color: #a7a9b0;
+  font-size: 17px;
 }
 
-/* PLATFORM */
-
-.platform-section {
-  background:linear-gradient(180deg,transparent,rgba(13,27,46,.55),transparent);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
+.game-list span:hover {
+  color: var(--blue-light);
 }
 
-.platform-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+/* PLATFORMS */
+
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
 }
 
-.platform-card {
-  text-align:center;
-  padding:30px 15px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  background:rgba(15,25,40,.75);
-  transition:.3s;
-}
-
-.platform-card:hover {
-  border-color:var(--blue);
-  transform:translateY(-6px);
-  box-shadow:0 12px 30px rgba(37,138,255,.08);
-}
-
-.platform-card .symbol {
-  font-size:27px;
-  color:var(--cyan);
-  margin-bottom:13px;
-}
-
-.platform-card h3 {
-  font-size:17px;
-}
-
-.platform-card p {
-  color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
-}
-
-/* PRIVACY */
-
-.privacy-box {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:35px;
-  align-items:center;
-  padding:40px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:linear-gradient(130deg,#101d30,#0a111d);
-}
-
-.privacy-box h2 {
-  font-size:30px;
-  line-height:1.3;
-}
-
-.privacy-box p {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:15px;
-}
-
-.privacy-points {
-  display:grid;
-  gap:15px;
-}
-
-.privacy-points div {
-  padding:13px 15px;
-  border-radius:8px;
-  background:rgba(255,255,255,.035);
-  border:1px solid var(--border);
-  font-size:13px;
-}
-
-.privacy-points span {
-  color:#59b8ff;
-  margin-right:9px;
+.platform-item {
+  padding: 14px 22px;
+  background: #191a1f;
+  border: 1px solid #292b32;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 /* DOWNLOAD */
 
-.download-box {
-  text-align:center;
-  padding:65px 25px;
-  border-radius:20px;
-  border:1px solid rgba(44,139,255,.3);
-  background:radial-gradient(ellipse at 50% 0%,rgba(37,138,255,.2),transparent 65%),#0d1727;
-  transition:.3s;
+.download {
+  background: #0b0c0f;
+  text-align: center;
 }
 
-.download-box:hover {
-  border-color:rgba(44,139,255,.55);
-  box-shadow:0 0 50px rgba(37,138,255,.07);
+.download h2 {
+  font-size: clamp(32px, 6vw, 55px);
+  margin-bottom: 18px;
 }
 
-.download-box h2 {
-  font-size:clamp(30px,5vw,44px);
-}
-
-.download-box p {
-  max-width:550px;
-  margin:15px auto 25px;
-  color:var(--muted);
-  font-size:14px;
+.download p {
+  color: var(--muted);
+  max-width: 580px;
+  margin: auto;
+  line-height: 1.8;
 }
 
 .coming-soon {
-  display:inline-block;
-  padding:9px 17px;
-  color:#80c7ff;
-  background:rgba(37,138,255,.12);
-  border:1px solid rgba(37,138,255,.25);
-  border-radius:7px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:2px;
+  display: inline-block;
+  margin-top: 30px;
+  padding: 13px 22px;
+  background: #1c2b54;
+  color: #a8c0ff;
+  border-radius: 7px;
+  font-size: 12px;
+  letter-spacing: 2px;
 }
 
 /* FOOTER */
 
 footer {
-  padding:40px 0;
-  border-top:1px solid var(--border);
-  background:#060910;
+  padding: 35px 0;
+  border-top: 1px solid #24262c;
 }
 
 .footer-content {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .footer-brand {
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:2px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
 
 .footer-brand span {
-  color:var(--blue);
+  color: var(--blue-light);
 }
 
 .footer-copy {
-  color:var(--muted);
-  font-size:12px;
+  color: #777b85;
+  font-size: 12px;
 }
 
 .footer-links {
-  display:flex;
-  gap:20px;
-  color:var(--muted);
-  font-size:12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: #a1a4ad;
+  font-size: 12px;
 }
 
 .footer-links a:hover {
-  color:var(--cyan);
+  color: var(--blue-light);
 }
 
-/* SCROLL REVEAL */
+/* REVEAL */
 
 .reveal {
-  opacity:0;
-  transform:translateY(35px);
-  transition:opacity .8s ease,transform .8s ease;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: .8s ease;
 }
 
 .reveal.visible {
-  opacity:1;
-  transform:translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* PAGE INTRO */
+/* DESKTOP */
 
-.page-enter {
-  animation:pageEnter 1s ease both;
-}
+@media(min-width: 1000px) {
+  .hero {
+    min-height: 950px;
+    padding-top: 350px;
+  }
 
-@keyframes pageEnter {
-  from {opacity:0;transform:translateY(18px);}
-  to {opacity:1;transform:translateY(0);}
+  .pixel-background {
+    left: 75%;
+    top: 200px;
+    width: 480px;
+    height: 650px;
+    opacity: .6;
+  }
 }
 
 /* MOBILE */
 
-@media(max-width:900px) {
-  .hero-visual {
-    right:-190px;
-    opacity:.35;
-  }
-
-  .features-grid {
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:700px) {
+@media(max-width: 700px) {
   .navbar {
-    height:72px;
+    height: 85px;
   }
 
-  .menu-toggle {
-    display:block;
+  .brand img {
+    width: 43px;
+    height: 43px;
   }
 
-  .nav-links {
-    position:absolute;
-    top:82px;
-    left:5%;
-    right:5%;
-    display:none;
-    flex-direction:column;
-    align-items:stretch;
-    padding:14px;
-    gap:5px;
-    background:rgba(10,17,29,.98);
-    border:1px solid var(--border);
-    border-radius:13px;
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-  }
-
-  .nav-links.open {
-    display:flex;
-    animation:menuEnter .25s ease;
-  }
-
-  @keyframes menuEnter {
-    from {opacity:0;transform:translateY(-8px);}
-    to {opacity:1;transform:translateY(0);}
-  }
-
-  .nav-links a {
-    padding:13px;
+  .brand-name {
+    font-size: 25px;
   }
 
   .hero {
-    min-height:730px;
-    padding-top:145px;
+    min-height: 1300px;
+    padding-top: 410px;
   }
 
   .hero h1 {
-    letter-spacing:-3px;
+    font-size: clamp(48px, 10vw, 75px);
+    letter-spacing: -3px;
   }
 
-  .hero-visual {
-    top:350px;
-    right:-220px;
-    transform:scale(.8);
-    opacity:.2;
+  .hero-description {
+    margin-top: 60px;
+    font-size: 19px;
   }
 
-  .features-grid {
-    grid-template-columns:1fr;
+  .hero-buttons {
+    margin-top: 45px;
   }
 
-  .platform-grid {
-    grid-template-columns:repeat(2,1fr);
+  .pixel-background {
+    top: 570px;
+    width: 480px;
+    height: 650px;
+    opacity: .8;
   }
 
-  .privacy-box {
-    grid-template-columns:1fr;
-    padding:25px;
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .feature {
+    padding: 28px;
   }
 
   section:not(.hero) {
-    padding:80px 0;
+    padding: 85px 0;
   }
 
   .footer-content {
-    flex-direction:column;
-    text-align:center;
+    flex-direction: column;
+    text-align: center;
   }
 }
 
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 
   .reveal {
-    opacity:1;
-    transform:none;
+    opacity: 1;
+    transform: none;
   }
 }
 </style>
 </head>
 
-<body class="loading">
+<body>
 
+<!-- LOADING SCREEN -->
 <div class="loader" id="loader">
-  <div class="loader-content">
-    <img class="loader-logo"
-      src="assets/images/astaraac-branding.png"
-      alt="AstaraAC"
-      onerror="this.style.display='none'">
-
-    <div class="loader-name">ASTARA<span>AC</span></div>
-    <div class="loader-subtitle">SECURITY BEYOND DETECTION</div>
-
-    <div class="loader-track">
-      <div class="loader-progress"></div>
-    </div>
-
-    <div class="loader-status" id="loaderStatus">INITIALIZING SYSTEM...</div>
-  </div>
+  <img src="assets/images/astaraac-branding.png" alt="AstaraAC">
+  <div class="loader-name">ASTARA<span>AC</span></div>
+  <div class="loader-bar"></div>
 </div>
 
-<div class="scroll-progress" id="scrollProgress"></div>
-<div class="background-glow"></div>
-<div class="noise"></div>
-
-<header id="header">
+<!-- HEADER -->
+<header>
   <div class="container">
     <nav class="navbar">
 
       <a href="#home" class="brand">
         <img src="assets/images/astaraac-branding.png" alt="AstaraAC Logo">
-        <div class="brand-text">ASTARA<span>AC</span></div>
+        <div class="brand-name">ASTARA<span>AC</span></div>
       </a>
 
-      <button class="menu-toggle" id="menuToggle"
-        aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#platform">Platform</a></li>
-        <li><a href="#privacy">Security</a></li>
-        <li><a href="documentation.html">Documentation</a></li>
-        <li><a href="changelog.html">Changelog</a></li>
-        <li><a href="downloads.html" class="nav-cta">Downloads ↗</a></li>
-      </ul>
+      <button class="menu-button" id="menuButton"
+        aria-label="Open menu" aria-expanded="false">☰</button>
 
     </nav>
   </div>
+
+  <div class="menu-panel" id="menuPanel">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#games">Supported Games</a>
+    <a href="#platform">Platforms</a>
+    <a href="documentation.html">Documentation ↗</a>
+    <a href="changelog.html">Changelog ↗</a>
+    <a href="downloads.html">Downloads ↗</a>
+  </div>
 </header>
 
-<main class="page-enter">
+<main>
 
+<!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-grid"></div>
+
+  <div class="background-lines"></div>
+
+  <!-- Pixel squares are generated below -->
+
+  <div class="pixel-background" id="pixelBackground"></div>
 
   <div class="container">
     <div class="hero-content">
 
-      <div class="eyebrow">
-        <span class="live-dot"></span>
-        ASTARAAC DEVELOPMENT PROJECT
-      </div>
-
       <h1>
-        Security Beyond<br>
-        <span class="gradient-text">Detection.</span>
+        <span>Security</span>
+        Beyond Detection.
       </h1>
 
       <p class="hero-description">
-        An advanced security ecosystem combining anti-cheat detection,
-        PC forensics, intelligent investigation tools and server protection
-        into one unified platform.
+        Advanced security for competitive environments.
+        AstaraAC brings anti-cheat detection, PC forensics
+        and server protection into one ecosystem.
       </p>
 
       <div class="hero-buttons">
         <a href="#features" class="btn btn-primary">
-          Explore Platform <span>→</span>
+          Explore AstaraAC
         </a>
+
         <a href="documentation.html" class="btn btn-secondary">
-          Read Documentation ↗
+          Read the documentation
         </a>
       </div>
 
-      <div class="hero-tags">
-        <span>ANTI-CHEAT</span>
-        <span>PC FORENSICS</span>
-        <span>SERVER SECURITY</span>
+      <div class="system-info">
+        <span class="symbol">▦</span>
+        <span>Windows</span>
+        <span>•</span>
+        <span>Paper / Folia / Velocity</span>
       </div>
 
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div class="orbit one"></div>
-    <div class="orbit two"></div>
-    <div class="orbit three"></div>
-    <div class="core">⌘</div>
-  </div>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
   <div class="container">
 
-    <div class="section-header reveal">
-      <span class="section-label">THE ECOSYSTEM</span>
-      <h2>More Than An Anti-Cheat.</h2>
-      <p>
-        A connected security platform built around detection,
-        investigation and protection.
-      </p>
-    </div>
+    <h2 class="section-title reveal">
+      Security <span>capabilities</span>
+    </h2>
 
-    <div class="features-grid">
+    <p class="section-description reveal">
+      A connected security ecosystem designed for
+      detection, investigation and server protection.
+    </p>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">⌘</div>
-        <h3>Advanced Anti-Cheat</h3>
-        <p>Modular detection architecture for identifying suspicious gameplay behavior and supporting fair server environments.</p>
+    <div class="features">
+
+      <article class="feature reveal">
+        <div class="feature-number">01 / DETECTION</div>
+        <h3>Anti-Cheat Engine</h3>
+        <p>Advanced detection architecture for identifying suspicious gameplay behavior.</p>
       </article>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">◈</div>
+      <article class="feature reveal">
+        <div class="feature-number">02 / FORENSICS</div>
         <h3>PC Forensics</h3>
-        <p>Structured forensic analysis with transparent, authorized investigation workflows.</p>
+        <p>Structured and transparent security investigation workflows.</p>
       </article>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">▣</div>
+      <article class="feature reveal">
+        <div class="feature-number">03 / DESKTOP</div>
         <h3>Windows Scanner</h3>
-        <p>A dedicated desktop application designed for security analysis and evidence review.</p>
+        <p>A dedicated desktop application for authorized security analysis.</p>
       </article>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">⬡</div>
+      <article class="feature reveal">
+        <div class="feature-number">04 / INVESTIGATION</div>
         <h3>Forensic Screenshare</h3>
-        <p>Consent-based investigation sessions with clear and reviewable findings.</p>
+        <p>Consent-based investigation sessions with reviewable findings.</p>
       </article>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">▤</div>
+      <article class="feature reveal">
+        <div class="feature-number">05 / MANAGEMENT</div>
         <h3>Web Dashboard</h3>
-        <p>A centralized interface for managing detections, investigations and connected servers.</p>
+        <p>Centralized management for detections, servers and investigations.</p>
       </article>
 
-      <article class="feature-card reveal">
-        <div class="feature-icon">⌬</div>
-        <h3>API & Integrations</h3>
-        <p>REST API, WebSocket infrastructure and Discord integration for connected workflows.</p>
+      <article class="feature reveal">
+        <div class="feature-number">06 / CONNECTIVITY</div>
+        <h3>API & Discord</h3>
+        <p>REST API, WebSocket and Discord integration.</p>
       </article>
 
     </div>
   </div>
 </section>
 
-<section class="platform-section" id="platform">
+<!-- GAMES -->
+<section class="games" id="games">
   <div class="container">
 
-    <div class="section-header reveal">
-      <span class="section-label">PLATFORM SUPPORT</span>
-      <h2>Built Across Platforms.</h2>
-      <p>Desktop and server technologies connected through one security ecosystem.</p>
+    <h2 class="section-title reveal">
+      Supported <span>games</span>
+    </h2>
+
+    <div class="game-list reveal">
+      <span>Minecraft Java</span>
+      <span>Minecraft Bedrock</span>
+      <span>Roblox</span>
     </div>
 
-    <div class="platform-grid">
-
-      <div class="platform-card reveal">
-        <div class="symbol">▣</div>
-        <h3>Windows</h3>
-        <p>Desktop Scanner</p>
-      </div>
-
-      <div class="platform-card reveal">
-        <div class="symbol">◈</div>
-        <h3>Paper</h3>
-        <p>Server Integration</p>
-      </div>
-
-      <div class="platform-card reveal">
-        <div class="symbol">⬡</div>
-        <h3>Folia</h3>
-        <p>Server Integration</p>
-      </div>
-
-      <div class="platform-card reveal">
-        <div class="symbol">⌘</div>
-        <h3>Velocity</h3>
-        <p>Proxy Integration</p>
-      </div>
-
-    </div>
   </div>
 </section>
 
-<section id="privacy">
+<!-- PLATFORMS -->
+<section id="platform">
   <div class="container">
 
-    <div class="privacy-box reveal">
+    <h2 class="section-title reveal">
+      Supported <span>platforms</span>
+    </h2>
 
-      <div>
-        <span class="section-label">SECURITY PRINCIPLES</span>
-        <h2>Powerful Security.<br>
-          <span class="gradient-text">Responsible Design.</span>
-        </h2>
-        <p>
-          AstaraAC is designed around transparency, authorization and
-          responsible security analysis. Findings should support human
-          review rather than automatically determine punishments.
-        </p>
-      </div>
+    <p class="section-description reveal">
+      Built to connect desktop security with modern
+      Minecraft server infrastructure.
+    </p>
 
-      <div class="privacy-points">
-        <div><span>✓</span> User consent and authorization</div>
-        <div><span>✓</span> Transparent investigation workflows</div>
-        <div><span>✓</span> No unrelated private data collection</div>
-        <div><span>✓</span> Human review of detection results</div>
-      </div>
-
+    <div class="platform-list reveal">
+      <div class="platform-item">Windows</div>
+      <div class="platform-item">Paper</div>
+      <div class="platform-item">Folia</div>
+      <div class="platform-item">Velocity</div>
     </div>
+
   </div>
 </section>
 
-<section id="download">
+<!-- PRIVACY -->
+<section>
   <div class="container">
 
-    <div class="download-box reveal">
-      <span class="section-label">THE NEXT GENERATION</span>
-      <h2>Something Powerful Is Coming.</h2>
-      <p>
-        AstaraAC is currently under active development.
-        Official software releases will be announced when ready.
-      </p>
-      <span class="coming-soon">DOWNLOADS COMING SOON</span>
-    </div>
+    <h2 class="section-title reveal">
+      Security with <span>responsibility.</span>
+    </h2>
+
+    <p class="section-description reveal">
+      AstaraAC is designed around user consent,
+      transparent investigations and responsible data handling.
+      Detection results support human review.
+    </p>
+
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download">
+  <div class="container">
+
+    <h2 class="reveal">AstaraAC is coming.</h2>
+
+    <p class="reveal">
+      The platform is currently under active development.
+      Official software releases will be announced when ready.
+    </p>
+
+    <span class="coming-soon reveal">
+      DOWNLOADS COMING SOON
+    </span>
 
   </div>
 </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-content">
 
-      <div class="footer-brand">ASTARA<span>AC</span></div>
+      <div class="footer-brand">
+        ASTARA<span>AC</span>
+      </div>
 
       <div class="footer-copy">
         © 2026 AstaraAC. Created by Resurect.
@@ -1143,82 +873,127 @@ footer {
 </footer>
 
 <script>
-/* LOADER */
+/* LOADING */
 const loader = document.getElementById("loader");
-const loaderStatus = document.getElementById("loaderStatus");
 
-const loadingMessages = [
-  "INITIALIZING SYSTEM...",
-  "LOADING INTERFACE...",
-  "PREPARING ASTARAAC..."
-];
-
-let messageIndex = 0;
-
-const messageTimer = setInterval(() => {
-  messageIndex++;
-
-  if (messageIndex < loadingMessages.length) {
-    loaderStatus.textContent = loadingMessages[messageIndex];
-  } else {
-    clearInterval(messageTimer);
-  }
-}, 450);
-
-function hideLoader() {
-  clearInterval(messageTimer);
-  loaderStatus.textContent = "SYSTEM READY";
-
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    document.body.classList.remove("loading");
-  }, 250);
+function closeLoader() {
+  loader.classList.add("hide");
 }
 
-window.addEventListener("load", hideLoader);
-
-/* SAFETY FALLBACK: never leave the screen blocked */
-setTimeout(() => {
-  if (!loader.classList.contains("hidden")) {
-    hideLoader();
-  }
-}, 3500);
-
-/* MOBILE MENU */
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
-menuToggle.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", isOpen);
-  menuToggle.textContent = isOpen ? "✕" : "☰";
+window.addEventListener("load", () => {
+  setTimeout(closeLoader, 800);
 });
 
-document.querySelectorAll(".nav-links a").forEach(link => {
+setTimeout(closeLoader, 3500);
+
+/* PIXEL GRID GENERATOR */
+const pixelBackground = document.getElementById("pixelBackground");
+
+const pattern = [
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000001110000000000",
+  "000011111000000000",
+  "000111111100000000",
+  "001111111110000000",
+  "000111111111000000",
+  "000011111111100000",
+  "000001111111110000",
+  "000000111111111000",
+  "000000011111111100",
+  "000000001111111110",
+  "000000000111111111",
+  "000000000011111111",
+  "000000000001111111",
+  "000000000000111111",
+  "000000000000011110",
+  "000000000000001100",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000"
+];
+
+const bluePattern = [
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000",
+  "000000100000000000",
+  "000001110000000000",
+  "000011111000000000",
+  "000111111100000000",
+  "000011111110000000",
+  "000001111111000000",
+  "000000111111100000",
+  "000000011111110000",
+  "000000001111111000",
+  "000000000111111100",
+  "000000000011111110",
+  "000000000001111110",
+  "000000000000111100",
+  "000000000000011100",
+  "000000000000001100",
+  "000000000000000100",
+  "000000000000000000",
+  "000000000000000000",
+  "000000000000000000"
+];
+
+for (let row = 0; row < 25; row++) {
+  for (let col = 0; col < 18; col++) {
+
+    const pixel = document.createElement("div");
+    const active = pattern[row][col] === "1";
+
+    if (active) {
+      const isBlue = bluePattern[row][col] === "1";
+
+      pixel.className = "pixel " +
+        (isBlue ? "blue" : (Math.random() > .5 ? "light" : "dark"));
+
+      pixel.style.opacity = ".5";
+      pixel.style.animationDelay = (Math.random() * 3) + "s";
+    }
+
+    pixelBackground.appendChild(pixel);
+  }
+}
+
+/* MENU */
+const menuButton = document.getElementById("menuButton");
+const menuPanel = document.getElementById("menuPanel");
+
+menuButton.addEventListener("click", () => {
+  const opened = menuPanel.classList.toggle("open");
+
+  menuButton.textContent = opened ? "✕" : "☰";
+  menuButton.setAttribute("aria-expanded", opened);
+});
+
+document.querySelectorAll(".menu-panel a").forEach(link => {
   link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
+    menuPanel.classList.remove("open");
+    menuButton.textContent = "☰";
+    menuButton.setAttribute("aria-expanded", "false");
   });
 });
 
-/* SCROLL EFFECTS */
-const header = document.getElementById("header");
-const scrollProgress = document.getElementById("scrollProgress");
+document.addEventListener("click", event => {
+  if (!menuPanel.contains(event.target) &&
+      !menuButton.contains(event.target)) {
+    menuPanel.classList.remove("open");
+    menuButton.textContent = "☰";
+    menuButton.setAttribute("aria-expanded", "false");
+  }
+});
 
-function updateScroll() {
-  const scrollTop = window.scrollY;
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
-
-  scrollProgress.style.width = progress + "%";
-  header.classList.toggle("scrolled", scrollTop > 30);
-}
-
-window.addEventListener("scroll", updateScroll, {passive:true});
-updateScroll();
-
-/* REVEAL ANIMATION */
+/* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1226,10 +1001,10 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, {threshold:0.12});
+}, { threshold: .12 });
 
-document.querySelectorAll(".reveal").forEach(element => {
-  observer.observe(element);
+document.querySelectorAll(".reveal").forEach(item => {
+  observer.observe(item);
 });
 </script>
 
