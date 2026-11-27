@@ -2,562 +2,1000 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b12">
-  <meta name="description" content="AstaraAC — Security Beyond Detection. Advanced anti-cheat detection, PC forensics and server protection.">
-  <title>AstaraAC — Security Beyond Detection</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b14">
+<meta name="description" content="AstaraAC — Security Beyond Detection.">
+<title>AstaraAC | Security Beyond Detection</title>
 
-  <style>
-    :root {
-      --bg: #080b12;
-      --surface: #101725;
-      --blue: #318bff;
-      --light: #69b4ff;
-      --text: #f4f7fc;
-      --muted: #9aa8bb;
-      --border: rgba(120,160,210,.15);
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+:root {
+  --bg: #070b14;
+  --panel: #0e1625;
+  --blue: #258aff;
+  --cyan: #51c8ff;
+  --text: #f4f8ff;
+  --muted: #91a1b8;
+  --border: rgba(130,170,220,.15);
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, Arial, sans-serif;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
+}
 
-    .container {
-      width: min(1120px, 90%);
-      margin: auto;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(28,110,255,.13), transparent 55%),
+    radial-gradient(ellipse at 90% 60%, rgba(0,160,255,.05), transparent 45%);
+}
 
-    header {
-      height: 78px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      background: rgba(8,11,18,.88);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(15px);
-    }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
+.container {
+  width: min(1160px, 90%);
+  margin: auto;
+}
 
-    .brand {
-      font-size: 23px;
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
+/* NAVIGATION */
 
-    .brand span {
-      color: var(--blue);
-    }
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(7,11,20,.78);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      list-style: none;
-    }
+.navbar {
+  height: 82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .nav-links a {
-      color: var(--muted);
-      font-size: 14px;
-      transition: .2s;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .nav-links a:hover {
-      color: white;
-    }
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 10px;
+}
 
-    .hero {
-      min-height: 690px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+.brand-text {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 650px;
-      height: 650px;
-      background: rgba(35,120,255,.13);
-      filter: blur(120px);
-      border-radius: 50%;
-      left: 50%;
-      top: 40%;
-      transform: translate(-50%,-50%);
-      pointer-events: none;
-    }
+.brand-text span {
+  color: var(--blue);
+}
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 850px;
-      margin: auto;
-      padding: 80px 0;
-    }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
 
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 16px;
-      border: 1px solid rgba(49,139,255,.35);
-      border-radius: 50px;
-      color: var(--light);
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin-bottom: 30px;
-      background: rgba(49,139,255,.07);
-    }
+.nav-links a {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  transition: .25s;
+}
 
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #42a5ff;
-      box-shadow: 0 0 12px #42a5ff;
-    }
+.nav-links a:hover,
+.nav-links a.active {
+  color: white;
+  background: rgba(40,135,255,.12);
+}
 
-    .hero h1 {
-      font-size: clamp(45px, 8vw, 82px);
-      font-weight: 900;
-      line-height: 1.12;
-      letter-spacing: -3px;
-    }
+.nav-links .nav-cta {
+  color: white;
+  background: linear-gradient(135deg,#278cff,#1262d9);
+  box-shadow: 0 5px 25px rgba(37,138,255,.2);
+}
 
-    .hero h1 span {
-      color: var(--blue);
-    }
+.menu-toggle {
+  display: none;
+  background: rgba(37,138,255,.1);
+  border: 1px solid var(--border);
+  color: white;
+  width: 43px;
+  height: 43px;
+  border-radius: 10px;
+  font-size: 23px;
+  cursor: pointer;
+}
 
-    .hero p {
-      max-width: 650px;
-      margin: 27px auto;
-      color: var(--muted);
-      font-size: 17px;
-    }
+/* HERO */
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 35px;
-    }
+.hero {
+  min-height: 820px;
+  padding: 170px 0 110px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    .btn {
-      padding: 13px 25px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: .25s;
-      border: 1px solid var(--border);
-    }
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .16;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(60,130,220,.12) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(60,130,220,.12) 1px,transparent 1px);
+  background-size: 55px 55px;
+  mask-image: linear-gradient(to bottom,black,transparent 90%);
+}
 
-    .btn-primary {
-      background: var(--blue);
-      color: white;
-      border-color: var(--blue);
-    }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
 
-    .btn-primary:hover {
-      background: #176fdf;
-      transform: translateY(-3px);
-    }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  background: rgba(37,138,255,.09);
+  border: 1px solid rgba(37,138,255,.3);
+  border-radius: 50px;
+  color: #80c4ff;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
 
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--light);
-    }
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #36baff;
+  box-shadow: 0 0 13px #36baff;
+  animation: pulse 1.8s infinite;
+}
 
-    section {
-      padding: 100px 0;
-    }
+@keyframes pulse {
+  50% { opacity: .35; }
+}
 
-    .section-heading {
-      text-align: center;
-      margin-bottom: 55px;
-    }
+.hero h1 {
+  font-size: clamp(48px,8vw,88px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  line-height: 1.05;
+}
 
-    .section-heading small {
-      color: var(--blue);
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: bold;
-    }
+.gradient-text {
+  background: linear-gradient(90deg,#238aff,#62d2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-    .section-heading h2 {
-      font-size: clamp(30px, 5vw, 43px);
-      margin-top: 10px;
-    }
+.hero-description {
+  max-width: 640px;
+  margin-top: 27px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
 
-    .section-heading p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: 12px auto 0;
-    }
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 35px;
+}
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
+.btn {
+  padding: 14px 23px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: .25s;
+  border: 1px solid var(--border);
+}
 
-    .feature {
-      background: linear-gradient(145deg,#111c2c,#0c121d);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 30px;
-      transition: .3s;
-    }
+.btn:hover {
+  transform: translateY(-4px);
+}
 
-    .feature:hover {
-      transform: translateY(-5px);
-      border-color: rgba(49,139,255,.5);
-    }
+.btn-primary {
+  background: linear-gradient(135deg,#278cff,#1262d9);
+  color: white;
+  box-shadow: 0 8px 30px rgba(37,138,255,.2);
+}
 
-    .feature-icon {
-      width: 45px;
-      height: 45px;
-      display: grid;
-      place-items: center;
-      background: rgba(49,139,255,.12);
-      color: var(--light);
-      border-radius: 10px;
-      font-size: 21px;
-      margin-bottom: 20px;
-    }
+.btn-secondary {
+  background: rgba(255,255,255,.035);
+  color: white;
+}
 
-    .feature h3 {
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
+.hero-tags {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 55px;
+  color: #71839d;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
 
-    .feature p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+.hero-tags span::before {
+  content: "◆";
+  color: var(--blue);
+  font-size: 9px;
+  margin-right: 8px;
+}
 
-    .platform {
-      background: #0c111b;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
+/* DECORATIVE VISUAL */
 
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
+.hero-visual {
+  position: absolute;
+  right: -80px;
+  top: 190px;
+  width: 440px;
+  height: 440px;
+  display: grid;
+  place-items: center;
+  opacity: .8;
+}
 
-    .platform-item {
-      text-align: center;
-      padding: 27px 12px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(57,147,255,.19);
+  border-radius: 50%;
+  animation: rotate 25s linear infinite;
+}
 
-    .platform-item h3 {
-      font-size: 17px;
-      color: var(--light);
-    }
+.orbit.one {
+  width: 280px;
+  height: 280px;
+}
 
-    .platform-item p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 6px;
-    }
+.orbit.two {
+  width: 390px;
+  height: 390px;
+  animation-direction: reverse;
+  border-style: dashed;
+}
 
-    .download-box {
-      text-align: center;
-      padding: 55px 25px;
-      background: linear-gradient(135deg,#10213a,#0c1422);
-      border: 1px solid rgba(49,139,255,.25);
-      border-radius: 18px;
-    }
+.orbit.three {
+  width: 440px;
+  height: 440px;
+  border-color: rgba(57,147,255,.08);
+}
 
-    .download-box h2 {
-      font-size: clamp(28px,5vw,40px);
-    }
+.orbit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  background: #42aaff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #42aaff;
+}
 
-    .download-box p {
-      color: var(--muted);
-      margin: 15px auto 25px;
-    }
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
 
-    .coming-soon {
-      display: inline-block;
-      padding: 9px 18px;
-      border-radius: 6px;
-      background: rgba(49,139,255,.12);
-      color: var(--light);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
+.core {
+  width: 150px;
+  height: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: 35px;
+  background: linear-gradient(145deg,#142b4c,#091321);
+  border: 1px solid rgba(75,165,255,.45);
+  box-shadow: 0 0 80px rgba(37,138,255,.2), inset 0 0 40px rgba(37,138,255,.08);
+  font-size: 55px;
+  color: #6ac4ff;
+}
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 35px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
+/* SECTIONS */
 
-    footer strong {
-      color: var(--light);
-    }
+section:not(.hero) {
+  padding: 110px 0;
+}
 
-    @media(max-width: 700px) {
-      .nav-links {
-        gap: 13px;
-        font-size: 12px;
-      }
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 55px;
+}
 
-      .nav-links a {
-        font-size: 11px;
-      }
+.section-label {
+  color: #54adff;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
 
-      .hero {
-        min-height: 580px;
-      }
+.section-header h2 {
+  font-size: clamp(30px,5vw,45px);
+  margin-top: 14px;
+  letter-spacing: -1.5px;
+}
 
-      .hero h1 {
-        letter-spacing: -2px;
-      }
+.section-header p {
+  color: var(--muted);
+  margin-top: 15px;
+  font-size: 14px;
+}
 
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
+/* FEATURES */
 
-      .platform-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
 
-      section {
-        padding: 75px 0;
-      }
-    }
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  min-height: 240px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(145deg,rgba(18,31,50,.9),rgba(10,17,29,.9));
+  transition: .3s;
+}
 
-    @media(max-width: 390px) {
-      .brand {
-        font-size: 17px;
-      }
+.feature-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(55,150,255,.5);
+  box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
 
-      .nav-links {
-        gap: 9px;
-      }
+.feature-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -70px;
+  bottom: -70px;
+  background: var(--blue);
+  filter: blur(70px);
+  opacity: .15;
+}
 
-      .nav-links a {
-        font-size: 10px;
-      }
-    }
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(37,138,255,.13);
+  border: 1px solid rgba(37,138,255,.2);
+  color: #69baff;
+  font-size: 22px;
+  margin-bottom: 23px;
+}
 
-    @media(prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
+.feature-card h3 {
+  font-size: 17px;
+  margin-bottom: 11px;
+}
 
-      *, *::before, *::after {
-        transition: none !important;
-      }
-    }
-  </style>
+.feature-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* PLATFORM */
+
+.platform-section {
+  background: linear-gradient(180deg,transparent,rgba(13,27,46,.55),transparent);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.platform-card {
+  text-align: center;
+  padding: 30px 15px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: rgba(15,25,40,.75);
+  transition: .3s;
+}
+
+.platform-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-5px);
+}
+
+.platform-card .symbol {
+  font-size: 27px;
+  color: var(--cyan);
+  margin-bottom: 13px;
+}
+
+.platform-card h3 {
+  font-size: 17px;
+}
+
+.platform-card p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+/* PRIVACY */
+
+.privacy-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: linear-gradient(130deg,#101d30,#0a111d);
+}
+
+.privacy-box h2 {
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+.privacy-box p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.privacy-points {
+  display: grid;
+  gap: 15px;
+}
+
+.privacy-points div {
+  padding: 13px 15px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.privacy-points span {
+  color: #59b8ff;
+  margin-right: 9px;
+}
+
+/* DOWNLOAD */
+
+.download-box {
+  text-align: center;
+  padding: 65px 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(44,139,255,.3);
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(37,138,255,.2),transparent 65%),
+    #0d1727;
+}
+
+.download-box h2 {
+  font-size: clamp(30px,5vw,44px);
+}
+
+.download-box p {
+  max-width: 550px;
+  margin: 15px auto 25px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.coming-soon {
+  display: inline-block;
+  padding: 9px 17px;
+  color: #80c7ff;
+  background: rgba(37,138,255,.12);
+  border: 1px solid rgba(37,138,255,.25);
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  background: #060910;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.footer-brand span {
+  color: var(--blue);
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: var(--cyan);
+}
+
+/* SCROLL ANIMATION */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+  .hero-visual {
+    right: -190px;
+    opacity: .35;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media(max-width: 700px) {
+  .navbar {
+    height: 72px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 82px;
+    left: 5%;
+    right: 5%;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px;
+    gap: 5px;
+    background: rgba(10,17,29,.98);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 13px;
+  }
+
+  .hero {
+    min-height: 730px;
+    padding-top: 145px;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  .hero-visual {
+    top: 350px;
+    right: -220px;
+    transform: scale(.8);
+    opacity: .2;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .privacy-box {
+    grid-template-columns: 1fr;
+    padding: 25px;
+  }
+
+  section:not(.hero) {
+    padding: 80px 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="container">
-    <nav>
-      <a href="#" class="brand">ASTARA<span>AC</span></a>
+    <nav class="navbar">
 
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
+      <a href="#home" class="brand">
+        <img src="assets/images/astaraac-branding.png" alt="AstaraAC Logo">
+        <div class="brand-text">ASTARA<span>AC</span></div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#platform">Platform</a></li>
-        <li><a href="documentation.html">Docs</a></li>
-        <li><a href="downloads.html">Downloads</a></li>
+        <li><a href="#privacy">Security</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="downloads.html" class="nav-cta">Downloads ↗</a></li>
       </ul>
+
     </nav>
   </div>
 </header>
 
 <main>
 
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-content">
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
 
-        <div class="status">
-          <span class="dot"></span>
-          IN DEVELOPMENT
-        </div>
+  <div class="container">
+    <div class="hero-content">
 
-        <h1>
-          Security Beyond<br>
-          <span>Detection.</span>
-        </h1>
-
-        <p>
-          An advanced security ecosystem built for anti-cheat detection,
-          PC forensics, server protection and intelligent security analysis.
-        </p>
-
-        <div class="buttons">
-          <a href="#features" class="btn btn-primary">Explore AstaraAC</a>
-          <a href="downloads.html" class="btn btn-secondary">View Downloads</a>
-        </div>
-
+      <div class="eyebrow">
+        <span class="live-dot"></span>
+        ASTARAAC DEVELOPMENT PROJECT
       </div>
+
+      <h1>
+        Security Beyond<br>
+        <span class="gradient-text">Detection.</span>
+      </h1>
+
+      <p class="hero-description">
+        An advanced security ecosystem combining anti-cheat detection,
+        PC forensics, intelligent investigation tools and server protection
+        into one unified platform.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#features" class="btn btn-primary">
+          Explore Platform <span>→</span>
+        </a>
+        <a href="documentation.html" class="btn btn-secondary">
+          Read Documentation ↗
+        </a>
+      </div>
+
+      <div class="hero-tags">
+        <span>ANTI-CHEAT</span>
+        <span>PC FORENSICS</span>
+        <span>SERVER SECURITY</span>
+      </div>
+
     </div>
-  </section>
+  </div>
 
-  <section id="features">
-    <div class="container">
+  <div class="hero-visual">
+    <div class="orbit one"></div>
+    <div class="orbit two"></div>
+    <div class="orbit three"></div>
+    <div class="core">⌘</div>
+  </div>
+</section>
 
-      <div class="section-heading">
-        <small>CORE CAPABILITIES</small>
-        <h2>Built for Advanced Security</h2>
+<section id="features">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-label">THE ECOSYSTEM</span>
+      <h2>More Than An Anti-Cheat.</h2>
+      <p>
+        A connected security platform built around detection,
+        investigation and protection.
+      </p>
+    </div>
+
+    <div class="features-grid">
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">⌘</div>
+        <h3>Advanced Anti-Cheat</h3>
         <p>
-          Multiple security technologies working together
-          in one unified ecosystem.
+          Modular detection architecture for identifying suspicious
+          gameplay behavior and supporting fair server environments.
+        </p>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">◈</div>
+        <h3>PC Forensics</h3>
+        <p>
+          Structured forensic analysis with transparent,
+          authorized investigation workflows.
+        </p>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">▣</div>
+        <h3>Windows Scanner</h3>
+        <p>
+          A dedicated desktop application designed for
+          security analysis and evidence review.
+        </p>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">⬡</div>
+        <h3>Forensic Screenshare</h3>
+        <p>
+          Consent-based investigation sessions with
+          clear and reviewable findings.
+        </p>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">▤</div>
+        <h3>Web Dashboard</h3>
+        <p>
+          A centralized interface for managing detections,
+          investigations and connected servers.
+        </p>
+      </article>
+
+      <article class="feature-card reveal">
+        <div class="feature-icon">⌬</div>
+        <h3>API & Integrations</h3>
+        <p>
+          REST API, WebSocket infrastructure and
+          Discord integration for connected workflows.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="platform-section" id="platform">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-label">PLATFORM SUPPORT</span>
+      <h2>Built Across Platforms.</h2>
+      <p>
+        Desktop and server technologies connected
+        through one security ecosystem.
+      </p>
+    </div>
+
+    <div class="platform-grid">
+
+      <div class="platform-card reveal">
+        <div class="symbol">▣</div>
+        <h3>Windows</h3>
+        <p>Desktop Scanner</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="symbol">◈</div>
+        <h3>Paper</h3>
+        <p>Server Integration</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="symbol">⬡</div>
+        <h3>Folia</h3>
+        <p>Server Integration</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="symbol">⌘</div>
+        <h3>Velocity</h3>
+        <p>Proxy Integration</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="container">
+
+    <div class="privacy-box reveal">
+
+      <div>
+        <span class="section-label">SECURITY PRINCIPLES</span>
+        <h2>Powerful Security.<br>
+          <span class="gradient-text">Responsible Design.</span>
+        </h2>
+        <p>
+          AstaraAC is designed around transparency,
+          authorization and responsible security analysis.
+          Findings should support human review rather than
+          automatically determine punishments.
         </p>
       </div>
 
-      <div class="features-grid">
-
-        <article class="feature">
-          <div class="feature-icon">⌘</div>
-          <h3>Anti-Cheat Engine</h3>
-          <p>
-            Advanced detection architecture designed to identify
-            suspicious gameplay behavior and support fair environments.
-          </p>
-        </article>
-
-        <article class="feature">
-          <div class="feature-icon">◈</div>
-          <h3>PC Forensics</h3>
-          <p>
-            Structured forensic analysis designed for transparent
-            and authorized security investigations.
-          </p>
-        </article>
-
-        <article class="feature">
-          <div class="feature-icon">⬡</div>
-          <h3>Forensic Screenshare</h3>
-          <p>
-            Consent-based investigation workflows with
-            transparent evidence review.
-          </p>
-        </article>
-
-        <article class="feature">
-          <div class="feature-icon">▣</div>
-          <h3>Security Dashboard</h3>
-          <p>
-            A centralized dashboard for managing detections,
-            investigations, servers and security events.
-          </p>
-        </article>
-
+      <div class="privacy-points">
+        <div><span>✓</span> User consent and authorization</div>
+        <div><span>✓</span> Transparent investigation workflows</div>
+        <div><span>✓</span> No unrelated private data collection</div>
+        <div><span>✓</span> Human review of detection results</div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="platform" id="platform">
-    <div class="container">
+<section id="download">
+  <div class="container">
 
-      <div class="section-heading">
-        <small>COMPATIBILITY</small>
-        <h2>One Ecosystem. Multiple Platforms.</h2>
-        <p>
-          Designed to connect desktop security
-          with modern Minecraft server infrastructure.
-        </p>
-      </div>
-
-      <div class="platform-grid">
-
-        <div class="platform-item">
-          <h3>Windows</h3>
-          <p>Desktop Scanner</p>
-        </div>
-
-        <div class="platform-item">
-          <h3>Paper</h3>
-          <p>Server Integration</p>
-        </div>
-
-        <div class="platform-item">
-          <h3>Folia</h3>
-          <p>Server Integration</p>
-        </div>
-
-        <div class="platform-item">
-          <h3>Velocity</h3>
-          <p>Proxy Integration</p>
-        </div>
-
-      </div>
+    <div class="download-box reveal">
+      <span class="section-label">THE NEXT GENERATION</span>
+      <h2>Something Powerful Is Coming.</h2>
+      <p>
+        AstaraAC is currently under active development.
+        Official software releases will be announced when ready.
+      </p>
+      <span class="coming-soon">DOWNLOADS COMING SOON</span>
     </div>
-  </section>
 
-  <section id="download">
-    <div class="container">
-      <div class="download-box">
-
-        <h2>AstaraAC Is Coming.</h2>
-
-        <p>
-          The platform is currently under active development.
-          Official releases will be announced when ready.
-        </p>
-
-        <span class="coming-soon">DOWNLOADS COMING SOON</span>
-
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
 <footer>
   <div class="container">
-    <p>ASTARAAC — Security Beyond Detection.</p>
-    <p>Created by <strong>Resurect</strong></p>
-    <p>© 2026 AstaraAC. All rights reserved.</p>
+    <div class="footer-content">
+
+      <div class="footer-brand">
+        ASTARA<span>AC</span>
+      </div>
+
+      <div class="footer-copy">
+        © 2026 AstaraAC. Created by Resurect.
+      </div>
+
+      <div class="footer-links">
+        <a href="documentation.html">Docs</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="downloads.html">Downloads</a>
+        <a href="https://github.com/resurect63">GitHub</a>
+      </div>
+
+    </div>
   </div>
 </footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+</script>
 
 </body>
 </html>
